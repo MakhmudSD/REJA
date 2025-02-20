@@ -525,7 +525,14 @@
     margin-top: 50px;
     margin-bottom: 231px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    position: relative;
+    width: 32.99px; 
+    height: 33.8px; 
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0, 25)) ;
+    /* Yellow */ 
 }
 
 .right_frame .menu{
@@ -535,4 +542,9 @@
     align-items: center;
     height: 493px;
     width: 65px;
+    position: relative;
+    /* width: 24.99px; 
+    height: 22.8px;  */
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0, 25));
 }
