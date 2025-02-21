@@ -1,0 +1,1 @@
+console.log("This area is for practicing");
