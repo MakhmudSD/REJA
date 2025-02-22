@@ -1,3 +1,22 @@
+// A-Task
+
+
+const word = "bubble";
+const currentLetter = "b";
+
+const countLetter = function(word, currentLetter) { 
+  let count = 0;
+  for(let i = 0; i < word.length; i++) {
+    if(word[i] == currentLetter) {
+      count++
+    }
+  }
+    return count
+};
+  console.log(countLetter(word, currentLetter));
+
+// Console.log("==========================================================")
+
 console.log("Jack Ma's advice");
 const list = [
     "Be a good learner", // 0-20 
