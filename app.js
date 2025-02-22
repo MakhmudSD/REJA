@@ -3,7 +3,8 @@ const express = require('express');
 const res = require("express/lib/response");
 const app = express();
 
-const db = express("/.server").db()
+// MongoDB connected
+const db = require("./server").db();
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -24,4 +25,4 @@ app.get("/", function (req, res) {
     res.render("reja");
 });
 
-modules_export = app;
+module.exports = app;
