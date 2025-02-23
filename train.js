@@ -1,9 +1,5 @@
 // A-Task
 
-
-const word = "bubble";
-const currentLetter = "b";
-
 const countLetter = function(word, currentLetter) { 
   let count = 0;
   for(let i = 0; i < word.length; i++) {
@@ -13,7 +9,7 @@ const countLetter = function(word, currentLetter) {
   }
     return count
 };
-  console.log(countLetter(word, currentLetter));
+  console.log(countLetter("apple", "p"));
 
 // Console.log("==========================================================")
 
