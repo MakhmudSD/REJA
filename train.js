@@ -1,15 +1,17 @@
-// A-Task
+// B-Task
 
-const countLetter = function(word, currentLetter) { 
-  let count = 0;
-  for(let i = 0; i < word.length; i++) {
-    if(word[i] == currentLetter) {
-      count++
-    }
-  }
+const findNumbers = function(example) {
+    let count = 0;
+    for(let i = 0; i < example.length; i++)
+    if( example[i] <= 9) {
+        count++ 
+    };
     return count
-};
-  console.log(countLetter("apple", "p"));
+}
+console.log(findNumbers("ad2a54y79wet0sfgb9asd123"));
+
+
+  
 
 // Console.log("==========================================================")
 
