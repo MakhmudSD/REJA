@@ -8,7 +8,7 @@ const findNumbers = function(example) {
     };
     return count
 }
-console.log(findNumbers("ad2a54y79wet0sfgb9asd123"));
+console.log(findNumbers("ad2a54y79w23et0sfgb9asd123"));
 
 
   

@@ -1,6 +1,5 @@
 console.log("Let's start the project");
 const express = require('express');
-const res = require("express/lib/response");
 const app = express();
 
 // MongoDB connected
