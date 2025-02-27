@@ -1,15 +1,17 @@
-// B-Task
+const { ReplSet } = require("mongodb/lib/core");
 
-const findNumbers = function(example) {
-    let count = 0;
-    for(let i = 0; i < example.length; i++)
-    if( example[i] <= 9) {
-        count++ 
-    };
-    return count
-}
-console.log(findNumbers("ad2a54y79w23et0sfgb9asd123"));
+// C-Task
 
+const twoStrings = function(str1, str2) {
+    const list1 = str1.split('').sort();
+    const list2 = str2.split('').sort();
+    if(list1.sort().join('') === list2.sort().join('')) {
+        return true
+    } else {
+        return false
+    }
+  }
+  console.log(twoStrings("bcad", "abcd"));
 
   
 
