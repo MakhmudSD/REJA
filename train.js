@@ -5,10 +5,12 @@ const { ReplSet } = require("mongodb/lib/core");
 const twoStrings = function(str1, str2) {
     const list1 = str1.split('').sort();
     const list2 = str2.split('').sort();
-    if(list1.sort().join('') === list2.sort().join('')) {
-        return true
-    } else {
-        return false
+    for(let i = 0; i < list1.length; i++) {
+        if(list1[i] === list2[i]) {
+            return true
+        } else {
+            return false
+        }
     }
   }
   console.log(twoStrings("bcad", "abcd"));
