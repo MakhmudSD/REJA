@@ -16,18 +16,19 @@ let createField = document.getElementById("create-field");
 document
 .getElementById("create-form")
 .addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    axios
-    .post("/create-item", { reja: createField.value })
+  e.preventDefault();
+  // axios package orqali create-item url i ga post qilamz. Axios json dan kelgan data automatic object ga aylantirib beradi va jonatetganda ham json data sifatida jonatib berad.
+  axios
+    .post("/create-item", { reja: createField.value }) // post methodida url bilan request body qismidan yuboradgan qismini pass qilamiz. Axios bu modern post va external package
     .then((response) => {
-        document.getElementById("item-list")
+      document
+        .getElementById("item-list")
         .insertAdjacentHTML("beforeend", itemTemplate(response.data));
-        createField.value = "";
-        createField.focus();
+      createField.value = "";
+      createField.focus();
     })
     .catch((err) => {
-        console.log("Please try again")
+      console.log("Please try again");
     });
 });
 
