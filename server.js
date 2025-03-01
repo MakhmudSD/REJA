@@ -1,30 +1,25 @@
 const http = require("http");
 const mongodb = require("mongodb");
 
-let db;
-const connectionString = "mongodb+srv://Makhmud:55VlC66b4UTReav3@cluster0.zcqov.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const connectionString = "mongodb+srv://Makhmud:55VlC66b4UTReav3@cluster0.zcqov.mongodb.net/?retryWrites=true&w=majority&Reja=Cluster0";
 
-mongodb.connect(
-  connectionString,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
+mongodb.connect(connectionString, {
+  useUnifiedTopology: true
+},
   (err, client) => {
-    if (err) console.log("ERROR on connection MongoDb");
-    else {
-      console.log("Mongodb Connection succesful");
+    if (err) {
+      console.log("ERROR", err);
+    } else {
+      console.log("Mongdodb is running successfully");
       module.exports = client;
-      
+
       const app = require("./app");
       const server = http.createServer(app);
       let PORT = 3000;
-      server.listen(PORT, function () {
+      server.listen(PORT, (err, data) => {
         console.log(
-          `The server has been running successfully on ${PORT}, http://localhost:${PORT}`
+          `The server is running successfully on ${PORT}, click the link http://localhost:${PORT}`
         );
       });
     }
-  }
-);
-
+  });
