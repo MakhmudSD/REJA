@@ -28,25 +28,34 @@ app.post("/delete-all", function (req, res) {
   }
 });
 
+// delete-item oper
 app.post("/delete-item", function (req, res) {
-  console.log("user entered /");
+  console.log("STEP2: user entered Backend");
   const id = req.body.id;
+  console.log("STEP3: BACKEND => DATABASE");
   db.collection("plans").deleteOne(
     { _id: new mongodb.ObjectId(id) },
+    console.log("STEP5: Database Delete Executed => Backend"),
     function (err, data) {
       res.json({ state: "success" });
+      console.log("STEP6: Backend => FrontEnd");
     }
   );
 });
 
+
+// edit-item oper
 app.post("/edit-item", (req, res) => {
-  console.log("user entered /");
+  console.log("STEP2: Frontend => Backend");
   const data = req.body;
+  console.log("STEP3: BACKEND => DATABASE");
   db.collection("plans").findOneAndUpdate(
     { _id: new mongodb.ObjectId(data.id) },
     { $set: { reja: data.new_input } },
+    console.log("STEP6: new_input received and updated in DATABASE => Backend"),
     function (err, data) {
       res.json({ state: "success" });
+      console.log("STEP7: Backend => FrontEnd");
     }
   );
 });

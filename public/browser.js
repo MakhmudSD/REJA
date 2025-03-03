@@ -33,45 +33,57 @@ document
 });
 
 document.addEventListener("click", function (e) {
-    // delete oper
-    console.log(e.target);
-    if(e.target.classList.contains("delete-me")) {
-        if(confirm("Do you want to delete this item?")) {
-           axios
-           .post("/delete-item", { id: e.target.getAttribute("data-id")})
-           .then((response) => {
-            console.log(response.data);
-            e.target.parentElement.parentElement.remove();
-           })
-           .catch((err) => {
-            console.log("Please try again!!!")
-           });
-        }
+  // delete oper
+  console.log("STEP1: FrontEnd => Backend");
+  console.log(e.target);
+  if (e.target.classList.contains("delete-me")) {
+    if (confirm("Do you want to delete this item?"))
+      console.log("STEP4: Backend => Frontend to confirm");
+    {
+      axios
+        .post("/delete-item", { id: e.target.getAttribute("data-id") })
+        .then((response) => {
+          console.log("STEP7: Backend => Frontend qaytish");
+          console.log(response.data);
+          e.target.parentElement.parentElement.remove();
+          console.log("STEP8: Row Removed");
+        })
+        .catch((err) => {
+          console.log("Please try again!!!");
+        });
     }
-    // edit oper
-    if (e.target.classList.contains("edit-me")) {
-      let userInput = prompt(
-        "Edit your plan",
-        e.target.parentElement.parentElement.querySelector(".item-text")
-          .innerHTML
-      );
-      if (userInput) {
-        axios
-          .post("/edit-item", {
+  }
+
+  // edit oper
+  if (e.target.classList.contains("edit-me")) {
+    let userInput = prompt(
+      "Edit your plan",
+      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+    );
+    console.log("STEP4: Backend => Frontend to edit");
+    if (userInput) {
+      axios
+        .post(
+          "/edit-item",
+          {
             id: e.target.getAttribute("data-id"),
             new_input: userInput,
-          })
-          .then((response) => {
-            console.log(response.data);
-            e.target.parentElement.parentElement.querySelector(
-              ".item-text"
-            ).innerHTML = userInput;
-          })
-          .catch((err) => {
-            console.log("Please try again!")
-          });
-      }
+          },
+          console.log("STEP5: new_input created and send to Backend")
+        )
+        .then((response) => {
+          console.log("STEP8: Backend => Frontend qaytish");
+          console.log(response.data);
+          e.target.parentElement.parentElement.querySelector(
+            ".item-text"
+          ).innerHTML = userInput;
+          console.log("STEP9: Edit executed");
+        })
+        .catch((err) => {
+          console.log("Please try again!");
+        });
     }
+  }
 });
 
 document.getElementById("clean-all").addEventListener("click", function() {
