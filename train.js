@@ -1,18 +1,49 @@
 
-// C-Task
+// D-Task
 
-const twoStrings = function(str1, str2) {
-    const list1 = str1.split('').sort();
-    const list2 = str2.split('').sort();
-    for(let i = 0; i < list1.length; i++) {
-        if(list1[i] === list2[i]) {
-            return true
-        } else {
-            return false
-        }
-    }
+class shop {
+  constructor(lagmon, cola, non) {
+    this.lagmon = lagmon;
+    this.cola = cola;
+    this.non = non;
   }
-  console.log(twoStrings("bcad", "abcd"));
+
+  showTime() {
+    const now = new Date();
+    return now.toTimeString().slice(0, 5);
+  }
+
+  sell(item, quantity) {
+    if (this[item] !== undefined && this[item] >= quantity) {
+      this[item] -= quantity;
+    } else {
+      console.log(`Unfortunately at ${this.showTime()} ${item} does not exist!!!`);
+    }
+    // this.remain(); can be used if necessary 
+  }
+
+  receive(item, quantity) {
+    if (this[item] !== undefined) {
+      this[item] += quantity;
+    } else {
+      console.log(
+        `Unfortunately at ${this.showTime()} ${item} does not exist!!!`
+      );
+    }
+    // this.remain(); can be used if necessary
+  }
+
+  remain() {
+    console.log(
+      `At ${this.showTime()}, ${this.lagmon} pockets of lagmon, ${
+        this.cola
+      } cans of cola and ${this.non} slices of non are available.`
+    );
+  }
+}
+
+const Shop = new shop(4, 5, 2);
+Shop.sell("non", 3) & Shop.receive("cola", 4) & Shop.remain();
 
   
 
