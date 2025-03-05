@@ -1,49 +1,57 @@
+// E-Task
+const getReverse = function(str) {
+  return str.split("").reverse().join("")
+}
+
+console.log(getReverse("Mike"));
+
+
 
 // D-Task
 
-class shop {
-  constructor(lagmon, cola, non) {
-    this.lagmon = lagmon;
-    this.cola = cola;
-    this.non = non;
-  }
+// class shop {
+//   constructor(lagmon, cola, non) {
+//     this.lagmon = lagmon;
+//     this.cola = cola;
+//     this.non = non;
+//   }
 
-  showTime() {
-    const now = new Date();
-    return now.toTimeString().slice(0, 5);
-  }
+//   showTime() {
+//     const now = new Date();
+//     return now.toTimeString().slice(0, 5);
+//   }
 
-  sell(item, quantity) {
-    if (this[item] !== undefined && this[item] >= quantity) {
-      this[item] -= quantity;
-    } else {
-      console.log(`Unfortunately at ${this.showTime()} ${item} does not exist!!!`);
-    }
-    // this.remain(); can be used if necessary 
-  }
+//   sell(item, quantity) {
+//     if (this[item] !== undefined && this[item] >= quantity) {
+//       this[item] -= quantity;
+//     } else {
+//       console.log(`Unfortunately at ${this.showTime()} ${item} does not exist!!!`);
+//     }
+//     // this.remain(); can be used if necessary 
+//   }
 
-  receive(item, quantity) {
-    if (this[item] !== undefined) {
-      this[item] += quantity;
-    } else {
-      console.log(
-        `Unfortunately at ${this.showTime()} ${item} does not exist!!!`
-      );
-    }
-    // this.remain(); can be used if necessary
-  }
+//   receive(item, quantity) {
+//     if (this[item] !== undefined) {
+//       this[item] += quantity;
+//     } else {
+//       console.log(
+//         `Unfortunately at ${this.showTime()} ${item} does not exist!!!`
+//       );
+//     }
+//     // this.remain(); can be used if necessary
+//   }
 
-  remain() {
-    console.log(
-      `At ${this.showTime()}, ${this.lagmon} pockets of lagmon, ${
-        this.cola
-      } cans of cola and ${this.non} slices of non are available.`
-    );
-  }
-}
+//   remain() {
+//     console.log(
+//       `At ${this.showTime()}, ${this.lagmon} pockets of lagmon, ${
+//         this.cola
+//       } cans of cola and ${this.non} slices of non are available.`
+//     );
+//   }
+// }
 
-const Shop = new shop(4, 5, 2);
-Shop.sell("non", 3) & Shop.receive("cola", 4) & Shop.remain();
+// const Shop = new shop(4, 5, 2);
+// Shop.sell("non", 3) & Shop.receive("cola", 4) & Shop.remain();
 
   
 
