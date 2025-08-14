@@ -12,10 +12,7 @@
   "author": "Mike",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "dotenv": "^17.2.1",
-=======
->>>>>>> 5ff5c3408d9fdaa1666c0b86cf77b837dd8f7167
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "mongodb": "^3.2.6",

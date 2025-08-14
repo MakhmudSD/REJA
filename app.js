@@ -1,76 +1,104 @@
 console.log("Let's start the Project");
+
 const express = require("express");
 const app = express();
+const { ObjectId } = require("mongodb");
 
+// Import MongoDB client from server.js
 const db = require("./server").db();
-const mongodb = require("mongodb");
 
+// Middleware
 app.use(express.static("public"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
+// View engine
 app.set("views", "views");
 app.set("view engine", "ejs");
 
+// ----------------------- ROUTES ----------------------- //
+
+// Create new item
 app.post("/create-item", (req, res) => {
-  console.log("user entered /");
   const new_reja = req.body.reja;
-  db.collection("plans").insertOne({reja: new_reja}, (err, data) => {
-    res.json(data.ops[0]);
+
+  if (!new_reja) {
+    return res.status(400).json({ error: "Reja cannot be empty" });
+  }
+
+  db.collection("plans").insertOne({ reja: new_reja }, (err, result) => {
+    if (err) {
+      console.error("Insert failed:", err);
+      return res.status(500).json({ error: "Insert failed" });
+    }
+    res.json({ _id: result.insertedId, reja: new_reja });
   });
 });
 
-app.post("/delete-all", function (req, res) {
+// Delete all items
+app.post("/delete-all", (req, res) => {
   if (req.body.delete_all) {
-    db.collection("plans").deleteMany(function () {
+    db.collection("plans").deleteMany({}, (err) => {
+      if (err) {
+        console.error("Delete all failed:", err);
+        return res.status(500).json({ error: "Delete all failed" });
+      }
       res.json({ state: "All items are deleted" });
     });
+  } else {
+    res.json({ state: "No action taken" });
   }
 });
 
-// delete-item oper
-app.post("/delete-item", function (req, res) {
-  console.log("STEP2: user entered Backend");
+// Delete single item
+app.post("/delete-item", (req, res) => {
   const id = req.body.id;
-  console.log("STEP3: BACKEND => DATABASE");
-  db.collection("plans").deleteOne(
-    { _id: new mongodb.ObjectId(id) },
-    console.log("STEP5: Database Delete Executed => Backend"),
-    function (err, data) {
-      res.json({ state: "success" });
-      console.log("STEP6: Backend => FrontEnd");
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+
+  db.collection("plans").deleteOne({ _id: new ObjectId(id) }, (err) => {
+    if (err) {
+      console.error("Delete item failed:", err);
+      return res.status(500).json({ error: "Delete failed" });
     }
-  );
+    res.json({ state: "success" });
+  });
 });
 
-
-// edit-item oper
+// Edit item
 app.post("/edit-item", (req, res) => {
-  console.log("STEP2: Frontend => Backend");
-  const data = req.body;
-  console.log("STEP3: BACKEND => DATABASE");
+  const { id, new_input } = req.body;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+
   db.collection("plans").findOneAndUpdate(
-    { _id: new mongodb.ObjectId(data.id) },
-    { $set: { reja: data.new_input } },
-    console.log("STEP6: new_input received and updated in DATABASE => Backend"),
-    function (err, data) {
-      res.json({ state: "success" });
-      console.log("STEP7: Backend => FrontEnd");
+    { _id: new ObjectId(id) },
+    { $set: { reja: new_input } },
+    { returnDocument: "after" },
+    (err, result) => {
+      if (err) {
+        console.error("Update failed:", err);
+        return res.status(500).json({ error: "Update failed" });
+      }
+      res.json({ state: "success", updatedItem: result.value });
     }
   );
 });
 
-app.get("/", function (req, res) {
-  console.log(req.body);
+// Get all items
+app.get("/", (req, res) => {
   db.collection("plans")
     .find()
-    .toArray(function (err, data) {
+    .toArray((err, data) => {
       if (err) {
-        console.log("Something went wrong");
-        res.end(err);
-      } else {
-        res.render("reja", {items: data});
+        console.error("Fetch failed:", err);
+        return res.status(500).send(err);
       }
+      res.render("reja", { items: data });
     });
 });
 
